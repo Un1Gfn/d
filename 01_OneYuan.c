@@ -20,23 +20,33 @@ int getNum()
 int main()
 {
   int sum=getNum();
-  int one=0,two=0,five=0,total=0,loopCounter=0;
-  for(one=sum; one>=0; --one){
-    for(two=(sum-one*1)/2; two>=0; --two){
+
+  // 2601
+  // int one=0,two=0,five=0,total=0,loopCounter=0;
+  // for(one=sum; one>=0; --one){
+  //   for(two=(sum-one*1)/2; two>=0; --two){
+  //     ++loopCounter;
+  //     five=(sum-one*1-two*2)/5;
+  //     if (one*1+two*2+five*5==sum){
+  //       print(one,two,five);
+  //       ++total;
+  //     }
+  //     else
+  //       continue;
+  //   }
+  // }
+
+  // 541
+  int two=0,five=0,total=0,loopCounter=0;
+  for(five=sum/5;five>=0;--five){
+    for(two=(sum-five*5)/2; two>=0; --two){
       ++loopCounter;
-      five=(sum-one*1-two*2)/5;
-      if (one*1+two*2+five*5==sum){
-        print(one,two,five);
-        ++total;
-      }
-      else
-        continue;
+      print(sum-five*5-two*2, two, five);
+      ++total;
     }
   }
+
   printf("Total: %d\n",total);
   printf("Loop count: %d\n",loopCounter);
   return 0;
 }
-
-// printf("%d %d %d\n",one,two,five);
-// printf("%d %d\n",one,two);
