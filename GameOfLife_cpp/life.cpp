@@ -19,12 +19,12 @@ void Life::update()
     for (col = 1; col <= maxcol; col++ )
       switch (neighbor_count(row, col)) {
       case 2:
-        // new_grid[row][col] = grid[row][col]; // Status stays the same.
-        new_grid[row][col] = 0;
+        new_grid[row][col] = grid[row][col]; // Status stays the same.
+        // new_grid[row][col] = 0;
         break;
       case 3:
-        // new_grid[row][col] = 1; // Cell is now alive.
-        new_grid[row][col] = 0;
+        new_grid[row][col] = 1; // Cell is now alive.
+        // new_grid[row][col] = 0;
         break;
       default:
         new_grid[row][col] = 0; // Cell is now dead.
@@ -64,4 +64,17 @@ void Life :: print( )
     cout << endl;
   }
   cout << endl;
+  
+  printf("\n");
+  printf("\n");
+  printf("\n");
+  for (row = 1; row <= maxrow; row++ ){
+    for (col = 1; col <= maxcol; col++ )
+      printf("%d ",neighbor_count(row,col));
+    printf("\n");
+  }
+  printf("\n");
+  printf("\n");
+  printf("\n");
+
 }
