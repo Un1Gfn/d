@@ -1,0 +1,52 @@
+key i
+key Return
+key minus
+key 1
+key Return
+key C
+key Return
+key p
+key Return
+
+key i
+key Return
+key 1
+key Return
+key C
+key Return
+key p
+key Return
+
+key i
+key Return
+key 0
+key Return
+key C
+key Return
+key p
+key Return
+
+key r
+key Return
+key 1
+key Return
+key p
+key Return
+
+key r
+key Return
+key minus
+key 1
+key Return
+key p
+key Return
+
+key r
+key Return
+key 0
+key Return
+key p
+key Return
+
+key q
+key Return

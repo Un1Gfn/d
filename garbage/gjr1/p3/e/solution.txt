@@ -1,0 +1,8 @@
+there is one lunar year every 4 years, excluding 3 years which are divisible by 100 but not 400
+400/4-3=97 lunar years every 400 years
+400*365+97=146097 days every 400 years
+146097=7*20871, 146097 is divisible by 7
+thus, if today is Monday, then after 400 years it's still Monday
+thus "the sequence of calendars repeats exactly every 400 years"
+
+prooved.
