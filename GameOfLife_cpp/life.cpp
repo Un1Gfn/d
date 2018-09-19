@@ -4,11 +4,26 @@ using namespace std;
 
 int Life::neighbor_count(int row, int col)
 {
-  int i, j;
   int count = 0;
-  for (i = row - 1; i <= row + 1; i++ )
-    for (j = col - 1; j <= col + 1; j++ )
-      count += grid[i][j];
+
+  // int i, j;
+  // for (i = row - 1; i <= row + 1; i++ )
+  //   for (j = col - 1; j <= col + 1; j++ )
+  //     count += grid[i][j];
+
+  // p23: hedges for protection, "if(row-1)...(row+1)...(col-1)...(col+1)..." unnecessary
+  // 3
+  count += grid[row-1][col-1];
+  count += grid[row-1][col];
+  count += grid[row-1][col+1];
+  // 3
+  count += grid[row+1][col-1];
+  count += grid[row+1][col];
+  count += grid[row+1][col+1];
+  // 2
+  count += grid[row][col-1];
+  count += grid[row][col+1];
+
   return count;
 }
 void Life::update()
@@ -20,11 +35,9 @@ void Life::update()
       switch (neighbor_count(row, col)) {
       case 2:
         new_grid[row][col] = grid[row][col]; // Status stays the same.
-        // new_grid[row][col] = 0;
         break;
       case 3:
         new_grid[row][col] = 1; // Cell is now alive.
-        // new_grid[row][col] = 0;
         break;
       default:
         new_grid[row][col] = 0; // Cell is now dead.
@@ -33,7 +46,7 @@ void Life::update()
     for (col = 1; col <= maxcol; col ++ )
       grid[row][col] = new_grid[row][col];
 }
-void Life :: initialize( )
+void Life::initialize()
 {
   int row, col;
   for (row = 0; row <= maxrow + 1; row ++ )
@@ -53,7 +66,7 @@ void Life :: initialize( )
     cin >> row >> col;
   }
 }
-void Life :: print( )
+void Life::print()
 {
   int row, col;
   cout << "\nThe current Life configuration is:" << endl;
@@ -65,16 +78,17 @@ void Life :: print( )
   }
   cout << endl;
   
-  printf("\n");
-  printf("\n");
-  printf("\n");
-  for (row = 1; row <= maxrow; row++ ){
-    for (col = 1; col <= maxcol; col++ )
-      printf("%d ",neighbor_count(row,col));
-    printf("\n");
-  }
-  printf("\n");
-  printf("\n");
-  printf("\n");
+  // 
+  // printf("\n");
+  // printf("\n");
+  // printf("\n");
+  // for (row = 1; row <= maxrow; row++ ){
+  //   for (col = 1; col <= maxcol; col++ )
+  //     printf("%d ",neighbor_count(row,col));
+  //   printf("\n");
+  // }
+  // printf("\n");
+  // printf("\n");
+  // printf("\n");
 
 }
