@@ -1,0 +1,4 @@
+# https://stackoverflow.com/questions/6376869/gdb-how-to-find-out-from-where-program-exited/6376940
+break exit
+run
+where

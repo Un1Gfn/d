@@ -9,3 +9,8 @@ Error_code serve( );
 Error_code retrieve(Queue_entry &x) const;
 // Additional members will represent queue data.
 };
+
+
+  // if(strchr("\n\t\040ap",command[0])!=NULL)
+  //   return command[0];
+  // printf("FUCK YOU\n");
