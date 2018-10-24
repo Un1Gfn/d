@@ -11,6 +11,15 @@ Error_code retrieve(Queue_entry &x) const;
 };
 
 
-  // if(strchr("\n\t\040ap",command[0])!=NULL)
-  //   return command[0];
-  // printf("FUCK YOU\n");
+if(strchr("\n\t\040ap",command[0])!=NULL)
+  return command[0];
+printf("FUCK YOU\n");
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+int main(){
+  char *x=NULL;
+  cout<<strlen(x);
+  return 0;
+}
