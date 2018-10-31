@@ -4,7 +4,7 @@
 #include <cmath>
 #include "09_Poly.h"
 
-Poly::Poly(const char *str):Ascending(1){
+Poly::Poly(const char *str):Ascending(1),Exp(NULL){
   while(*str){
     double Coef=GetCoef(str);
     int Expn=GetExpn(str);

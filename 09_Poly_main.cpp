@@ -14,7 +14,7 @@ int main(){
   printf("\n");
   // Poly p("1x^2+3x^4+5x^6");
   // Poly p("x-x^2+2x");
-  Poly p("-x-x^2-x+4x^2+x^100-99x^100");
+  Poly p("-x-x^2-x+4x^2+x^100-99x^100+2x");
   p.Display();
   
   // printf("\n");
