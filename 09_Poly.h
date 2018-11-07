@@ -13,7 +13,7 @@ typedef struct _Node{
 class Poly{
 public:
   Poly();
-  Poly(const char *str);
+  Poly(const char *str,bool ascending=1);
   Poly(const Poly&);
   ~Poly();
   void Display();
@@ -22,7 +22,7 @@ public:
 public:
   void Insert(int Coef,int Expn);
   bool Ascending;
-  Node *Exp;
+  Node *Exp; // head
   int GetCoef(const char *&str);
   int GetExpn(const char *&str);
 };

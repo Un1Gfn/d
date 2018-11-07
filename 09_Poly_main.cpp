@@ -1,27 +1,32 @@
 #include <cstdio>
 #include "09_Poly.h"
 
-// void testCoefExpn(const char* Str){
-//   Poly p;
-//   printf("%7d ",p.GetCoef(Str));
-//   printf("%7d\n",p.GetExpn(Str));
-// }
 
 int main(){
 
   printf("\n");
 
   printf("\n");
-  // Poly p("1x^2+3x^4+5x^6");
-  // Poly p("x-x^2+2x");
-  Poly p("-x-x^2-x+4x^2+x^100-99x^100+2x");
+  Poly p("-x-x^2-x+4x^2+x^100-99x^100+2x",true);
   p.Display();
+  p.Reverse();
+  p.Display();
+  Poly q("-x-x^2-x+4x^2+x^100-99x^100+2x",false);
+  q.Display();
+  q.Reverse();
+  q.Display();
   
   // printf("\n");
-  // Poly p;
+  // Poly p("x+x^2");
   // p.Display();
-  // p.Insert(1,2);
-  // p.Insert(-1,0);
+  // p.Reverse();
+  // p.Display();
+  // // );
+
+  // printf("\n");
+  // Poly p("x+x^2+x^3");
+  // p.Display();
+  // p.Reverse();
   // p.Display();
 
   // printf("\n");

@@ -4,7 +4,8 @@
 #include <cmath>
 #include "09_Poly.h"
 
-Poly::Poly(const char *str):Ascending(1),Exp(NULL){
+Poly::Poly(const char *str,bool ascending):Exp(NULL){
+  Ascending=ascending;
   while(*str){
     double Coef=GetCoef(str);
     int Expn=GetExpn(str);
@@ -72,31 +73,89 @@ void Poly::Display(){
   printf("\n");
 }
 
+void Poly::Reverse(){
+
+  Ascending=!Ascending;
+
+  if(!Exp)
+    return;
+
+  if(!Exp->next)
+    return;
+
+  Node *a=Exp,*b=a->next;
+  a->next=nullptr;
+  Node *c=b->next;
+  b->next=a;
+  if(!c){
+    Exp=b;
+    return;
+  }
+
+  while(1){
+    a=b;
+    b=c;
+    c=b->next;
+    b->next=a;
+    if(!c){
+      Exp=b;
+      return;
+    }
+  }
+}
+
+// void Poly::Insert(int Coef,int Expn){
+//   Node **p=&Exp;
+//   if(Ascending){
+//     while(1){
+//       if(*p==NULL){
+//         *p=new Node{Coef,Expn,NULL};
+//         break;
+//       }
+//       if((*p)->Expn > Expn){
+//         *p=new Node{Coef,Expn,*p};
+//         break;
+//       }
+//       if((*p)->Expn == Expn){
+//         (*p)->Coef+=Coef;
+//         if(fabs((*p)->Coef)<0.01){
+//           Node *del=(*p);
+//           *p=(*p)->next;
+//           delete del;
+//         }
+//         break;
+//       }
+//       p=&((*p)->next);
+//     }
+//   }else{
+//     printf("Descending\n");
+//     exit(1);
+//   }
+// }
+
 void Poly::Insert(int Coef,int Expn){
   Node **p=&Exp;
-  if(Ascending){
-    while(1){
-      if(*p==NULL){
-        *p=new Node{Coef,Expn,NULL};
-        break;
-      }
-      if((*p)->Expn > Expn){
-        *p=new Node{Coef,Expn,*p};
-        break;
-      }
-      if((*p)->Expn == Expn){
-        (*p)->Coef+=Coef;
-        if(fabs((*p)->Coef)<0.01){
-          Node *del=(*p);
-          *p=(*p)->next;
-          delete del;
-        }
-        break;
-      }
-      p=&((*p)->next);
+  while(1){
+    if(*p==NULL){
+      *p=new Node{Coef,Expn,NULL};
+      break;
     }
-  }else{
-    printf("Descending\n");
-    exit(1);
+    if(
+      ( Ascending  && ((*p)->Expn > Expn) )||
+      ( !Ascending && ((*p)->Expn < Expn) )
+    ){
+      *p=new Node{Coef,Expn,*p};
+      break;
+    }
+    if((*p)->Expn == Expn){
+      (*p)->Coef+=Coef;
+      if(fabs((*p)->Coef)<0.01){
+        Node *del=(*p);
+        *p=(*p)->next;
+        delete del;
+      }
+      break;
+    }
+    p=&((*p)->next);
   }
 }
