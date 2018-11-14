@@ -7,14 +7,24 @@ int main(){
   printf("\n");
 
   printf("\n");
-  Poly p("-x-x^2-x+4x^2+x^100-99x^100+2x",true);
+  Poly p("x+x^3-x^5+x^2-3x+x^100-7x^4+9x^7",true);
   p.Display();
   p.Reverse();
   p.Display();
-  Poly q("-x-x^2-x+4x^2+x^100-99x^100+2x",false);
+  Poly q("x+x^3-x^5+x^2-3x+x^100-7x^4+9x^7",false);
   q.Display();
   q.Reverse();
   q.Display();
+
+  // printf("\n");
+  // Poly p("-x-x^2-x+4x^2+x^100-99x^100+2x",true);
+  // p.Display();
+  // p.Reverse();
+  // p.Display();
+  // Poly q("-x-x^2-x+4x^2+x^100-99x^100+2x",false);
+  // q.Display();
+  // q.Reverse();
+  // q.Display();
   
   // printf("\n");
   // Poly p("x+x^2");
