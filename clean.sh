@@ -1,3 +1,3 @@
 #!/bin/bash 
 
-find ./ -type f -a \( -name '*.out' -o -name '*.o' -o -name '*.gch' \) -exec rm -v {} \;
+find ./ -type f -a \( -name '*.out' -o -name '*.o' -o -name '*.gch' -o -name 'vgcore.?????' \) -exec rm -v {} \;
