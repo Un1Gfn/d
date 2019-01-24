@@ -122,10 +122,9 @@ using namespace std;
     Error_code insert(int position, const List_entry &x);
     // bool empty() const;
     // void clear();
-  private:
+  protected:
     int count;
     Node<List_entry> *head;
-  protected:
     mutable int current_position;
     mutable Node<List_entry> *current;
     // Node<List_entry> *set_position(int position) const;
@@ -144,7 +143,7 @@ using namespace std;
   Error_code List<List_entry>::insert(int position, const List_entry &x)
   {
     if (position < 0 || position > count)
-      return range_error;
+      return Error_code::range_error;
     Node<List_entry> *new_node, *previous, *following;
     if (position > 0) {
       previous = set_position(position - 1);
