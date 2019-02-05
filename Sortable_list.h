@@ -22,15 +22,23 @@ public:
 	using List<Record>::List;
 	using List<Record>::print;
 	void insertion_sort();
-	void selection_sort();
 private:
 	using List<Record>::count;
+
 #ifdef CONTIGUOUS
+public:
+	void selection_sort();
+private:
+	int max_key(int,int);
+	void swap(int,int);
 	using List<Record>::entry;
 #endif
+
 #ifdef LINKED
+private:
 	using List<Record>::head;
 #endif
+
 };
 
 #ifdef CONTIGUOUS
@@ -89,5 +97,35 @@ void Sortable_list<Record>::insertion_sort(){
 			}
 		}
 	}while(first_unsorted!=nullptr); // Traverse unsorted part
+}
+#endif
+
+#ifdef CONTIGUOUS
+template <class Record>
+void Sortable_list<Record>::selection_sort(){
+	INIT;
+	for(int position=count-1;position>0;--position){
+		int max=max_key(0,position);
+		swap(max,position);
+	}
+}
+template <class Record>
+int Sortable_list<Record>::max_key(int low,int high){
+	int largest=low;
+	for(int i=low+1;i<=high;++i){
+		COMPARE;
+		if(entry[i]>entry[largest])
+			largest=i;
+	}
+	return largest;
+}
+template <class Record>
+void Sortable_list<Record>::swap(int low,int high){
+	MOVE;
+	Record tmp=entry[low];
+	MOVE;
+	entry[low]=entry[high];
+	MOVE;
+	entry[high]=tmp;
 }
 #endif
