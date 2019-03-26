@@ -123,8 +123,10 @@ void List<List_entry>::print()const
 template <class List_entry>
 void List<List_entry>::print()const
 {
+  cout<<"[ ";
   for(Node<List_entry> *p=head; p!=nullptr; p=p->next)
     cout<<p->entry<<" ";
+  cout<<"]";
   cout<<endl;
 }
 #endif

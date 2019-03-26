@@ -35,6 +35,8 @@ private:
 #endif
 
 #ifdef LINKED
+public:
+	void merge_sort();
 private:
 	using List<Record>::head;
 #endif
@@ -128,4 +130,75 @@ void Sortable_list<Record>::swap(int low,int high){
 	MOVE;
 	entry[high]=tmp;
 }
+#endif
+
+#ifdef LINKED
+template <class Record>
+Node<Record> *divide_from(Node<Record> *sub_list)
+{
+	Node<Record> *x2=sub_list;
+	Node<Record> *x1=sub_list;
+	Node<Record> *bak=nullptr;
+	while(x2&&x2->next){
+		bak=x1;
+		x1=x1->next;
+		x2=x2->next->next;
+	}
+	// Odd amount of elements
+	if(x2){
+		bak=x1->next;
+		x1->next=nullptr;
+		return bak;
+	}
+	// Even amount of elements or no element
+	if(bak)
+		bak->next=nullptr;
+	return x1;
+}
+template <class Record>
+/// @return Head of the combined list
+Node<Record> *merge(Node<Record> *first,Node<Record> *second){
+	Node<Record> *combined=nullptr;
+	Node<Record> **last_sorted=&combined; // points to the last node of sorted list
+	while(true){
+		#define F {\
+			*last_sorted=first;\
+			last_sorted=&((*last_sorted)->next);\
+			first=first->next;\
+		}
+		#define S {\
+			*last_sorted=second;\
+			last_sorted=&((*last_sorted)->next);\
+			second=second->next;\
+		}
+		if(first){
+			if(second)
+				if(first->entry<=second->entry)
+					F
+				else
+					S
+			else
+				F
+		}else if(second){
+			S
+		}else{
+			break;
+		}
+	}
+	return combined;
+}
+template <class Record>
+void recursive_merge_sort(Node<Record> **sub_list){
+	if(*sub_list && (*sub_list)->next){
+		Node<Record> *second_half = divide_from(*sub_list);
+		recursive_merge_sort(sub_list);
+		recursive_merge_sort(&second_half);
+		*sub_list = merge(*sub_list, second_half);
+	}
+}
+template <class Record>
+void Sortable_list<Record>::merge_sort(){
+	recursive_merge_sort(&head);
+}
+
 #endif
