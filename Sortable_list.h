@@ -28,7 +28,10 @@ private:
 #ifdef CONTIGUOUS
 public:
 	void selection_sort();
+  void quick_sort();
 private:
+  void recursive_quick_sort(int low, int high);
+  int partition(int low, int high);
 	int max_key(int,int);
 	void swap(int,int);
 	using List<Record>::entry;
@@ -200,5 +203,37 @@ template <class Record>
 void Sortable_list<Record>::merge_sort(){
 	recursive_merge_sort(&head);
 }
+#endif
 
+#ifdef CONTIGUOUS
+template<class Record>
+void Sortable_list<Record>::quick_sort(){
+  recursive_quick_sort(0, count - 1);
+}
+template<class Record>
+void Sortable_list<Record>::recursive_quick_sort(int low, int high){
+  int pivot_position;
+  if (low < high) {
+   // Otherwise, no sorting is needed.
+  pivot_position = partition(low, high);
+  recursive_quick_sort(low, pivot_position - 1);
+  recursive_quick_sort(pivot_position + 1, high);
+  }
+}
+template<class Record>
+int Sortable_list<Record>::partition(int low, int high){
+  Record pivot;
+  swap(low, (low + high)/2);
+  pivot = entry[low]; // First entry is now pivot.
+
+  int last_small=low;
+  for(int i=low+1;i<=high;++i){
+    if(entry[i]>=pivot)
+      continue;
+    ++last_small;
+    swap(last_small,i);
+  }
+  swap(low,last_small);
+  return last_small;
+}
 #endif
