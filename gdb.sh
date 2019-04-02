@@ -1,16 +1,24 @@
 #!/bin/bash
 
+# cat >/tmp/gdb <<EOF
+# break Sortable_list<char>::insert_heap
+# run
+# continue
+# continue
+# continue
+# continue
+# EOF
+
 cat >/tmp/gdb <<EOF
-break Sortable_list<char>::insert_heap
+set confirm off
+# break Sortable_list<int>::build_heap
+break Sortable_list<int>::insert_heap
 run
-continue
-continue
-continue
-continue
+# finish
 EOF
 
 # -batch
-reset
+# reset
 gdb -q -x /tmp/gdb a.out
 
 rm /tmp/gdb

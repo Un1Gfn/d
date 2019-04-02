@@ -32,41 +32,41 @@
 // }
 
 // Random length
-// void test_random(int lenL,int lenU,int num_case){
-//   uniform_int_distribution<int> lenD(lenL,lenU);
-//   uniform_int_distribution<int> eleD(0,99);
-//   default_random_engine e(time(0));
-//   for(int i=0;i!=num_case;++i){
-//     Sortable_list<int> l;
-//     int len=lenD(e);
-//     for(int j=0;j!=len;++j)
-//       l.insert(j,eleD(e));
-//     l.print();
-//     // INIT;
-//     SORT
-//     l.print();
-//     // SUM;
-//     cout<<endl;
-//   }
-// }
-
-void test_static(){
-  Sortable_list<char> l{
-    'y',
-    'r',
-    'p',
-    'd',
-    'f',
-    'b',
-    'k',
-    'a',
-    'c'
-  };
-  l.print();
-  SORT
-  l.print();
-  cout<<endl;
+void test_random(int lenL,int lenU,int num_case){
+  uniform_int_distribution<int> lenD(lenL,lenU);
+  uniform_int_distribution<int> eleD(0,99);
+  default_random_engine e(time(0));
+  for(int i=0;i!=num_case;++i){
+    Sortable_list<int> l;
+    int len=lenD(e);
+    for(int j=0;j!=len;++j)
+      l.insert(j,eleD(e));
+    l.print();
+    // INIT;
+    SORT
+    l.print();
+    // SUM;
+    cout<<endl;
+  }
 }
+
+// void test_static(){
+//   Sortable_list<char> l{
+//     'y',
+//     'r',
+//     'p',
+//     'd',
+//     'f',
+//     'b',
+//     'k',
+//     'a',
+//     'c'
+//   };
+//   l.print();
+//   SORT
+//   l.print();
+//   cout<<endl;
+// }
 
 // void test_static(){
 //   for(initializer_list<int> il:initializer_list<initializer_list<int>>{
@@ -95,13 +95,14 @@ void test_static(){
 //     // INIT;
 //     SORT
 //     // SUM;
+//     l.print();
 //     cout<<endl;
 //   }
 // }
 
 int main(){
-  test_static();
-  // test_random(10,20,7);
+  // test_static();
+  test_random(10,20,7);
   // stat();
   return 0;
 }

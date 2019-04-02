@@ -255,7 +255,6 @@ void Sortable_list<Record>::heap_sort(){
     insert_heap(current, 0, last_unsorted - 1); // Restore the heap
   }
 }
-
 template<class Record>
 void Sortable_list<Record>::insert_heap(const Record &current, int low, int high){
   int p=low;
@@ -265,33 +264,37 @@ void Sortable_list<Record>::insert_heap(const Record &current, int low, int high
     #define PROMOTE_L {entry[p]=entry[L];p=L;}
     #define PROMOTE_R {entry[p]=entry[R];p=R;}
     #define PROMOTE_C {entry[p]=current;break;}
-    if(L>high){ // p is a leaf
+    if(L>high){ // p: leaf
       PROMOTE_C
     }else{
-      if(R>high){
+      if(R>high){ // p: left child only
         if(current>entry[L])
           PROMOTE_C
         else
           PROMOTE_L
-      }else{
-        if(entry[L]>entry[R])
-          PROMOTE_L
-        else
-          PROMOTE_R
+      }else{ // p: 2 children
+        if(entry[L]>entry[R]){
+          if(current>entry[L])
+            PROMOTE_C
+          else
+            PROMOTE_L
+        }else{
+          if(current>entry[R])
+            PROMOTE_C
+          else
+            PROMOTE_R
+        }
       }
     }
   }
-  print();
-  cout<<endl;
 }
-
 template<class Record>
 void Sortable_list<Record>::build_heap(){
-  // int low; // All entries beyond the position low form a heap.
-  // for (low = count/2 - 1; low >= 0; low -- ) {
-  //   Record current = entry[low];
-  //   insert_heap(current, low, count - 1);
-  // }
+  int low; // All entries beyond the position low form a heap.
+  for (low = count/2 - 1; low >= 0; low -- ) {
+    Record current = entry[low];
+    insert_heap(current, low, count - 1);
+  }
 }
 // template<class Record>
 // void Sortable_list<Record>::print_heap()const{
