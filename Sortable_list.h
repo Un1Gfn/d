@@ -1,5 +1,6 @@
 #pragma once
 #include "List.h"
+#include <cmath>
 
 #ifdef STATISTICS
 unsigned long long compares=0;
@@ -29,9 +30,13 @@ private:
 public:
 	void selection_sort();
   void quick_sort();
+  void heap_sort();
+  // void print_heap()const;
 private:
-  void recursive_quick_sort(int low, int high);
-  int partition(int low, int high);
+  void recursive_quick_sort(int low, int high); // quick_sort
+  int partition(int low, int high); // quick_sort
+  void insert_heap(const Record &current, int low, int high); // heap_sort
+  void build_heap();
 	int max_key(int,int);
 	void swap(int,int);
 	using List<Record>::entry;
@@ -236,4 +241,72 @@ int Sortable_list<Record>::partition(int low, int high){
   swap(low,last_small);
   return last_small;
 }
+#endif
+
+#ifdef CONTIGUOUS
+template<class Record>
+void Sortable_list<Record>::heap_sort(){
+  Record current; // temporary storage for moving entries
+  int last_unsorted; // Entries beyond last_unsorted have been sorted.
+  build_heap(); // First phase: Turn the list into a heap.
+  for(last_unsorted = count - 1; last_unsorted > 0; last_unsorted -- ) {
+    current = entry[last_unsorted]; // Extract the last entry from the list.
+    entry[last_unsorted] = entry[0]; // Move top of heap to the end
+    insert_heap(current, 0, last_unsorted - 1); // Restore the heap
+  }
+}
+
+template<class Record>
+void Sortable_list<Record>::insert_heap(const Record &current, int low, int high){
+  int p=low;
+  while(true){
+    int L=2*p+1;
+    int R=2*p+2;
+    #define PROMOTE_L {entry[p]=entry[L];p=L;}
+    #define PROMOTE_R {entry[p]=entry[R];p=R;}
+    #define PROMOTE_C {entry[p]=current;break;}
+    if(L>high){ // p is a leaf
+      PROMOTE_C
+    }else{
+      if(R>high){
+        if(current>entry[L])
+          PROMOTE_C
+        else
+          PROMOTE_L
+      }else{
+        if(entry[L]>entry[R])
+          PROMOTE_L
+        else
+          PROMOTE_R
+      }
+    }
+  }
+  print();
+  cout<<endl;
+}
+
+template<class Record>
+void Sortable_list<Record>::build_heap(){
+  // int low; // All entries beyond the position low form a heap.
+  // for (low = count/2 - 1; low >= 0; low -- ) {
+  //   Record current = entry[low];
+  //   insert_heap(current, low, count - 1);
+  // }
+}
+// template<class Record>
+// void Sortable_list<Record>::print_heap()const{
+//   int index=0;
+//   int i=0;
+//   while(true){
+//     for(int j=1; j<=pow(2,i); ++j){
+//       cout<<entry[index]<<" ";
+//       ++index;
+//       if(index>count-1)
+//         goto end;
+//     }
+//     cout<<endl;
+//     ++i;
+//   }
+//   end: return;
+// }
 #endif
