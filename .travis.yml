@@ -1,0 +1,39 @@
+# Doxygen only
+
+language: cpp
+services: docker
+
+git:
+  depth: 1
+branches:
+  only: master
+
+sudo: required
+
+script:
+  # https://hub.docker.com/r/mikkeloscar/arch-travis
+  # https://github.com/mikkeloscar/arch-travis
+  - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
+
+arch:
+  packages:
+    - doxygen
+    - graphviz
+  script:
+    # - export PREDEFINED=LINKED
+    - export PROJECT_NUMBER="r$(printf '%02d' $(git rev-list --count HEAD)).$(git rev-parse --short HEAD) built at $(TZ=Asia/Shanghai date +'%F %A %T UTC%-:::z')"
+    - export PREDEFINED=CONTIGUOUS
+    - export EXCLUDE=garbage
+    - doxygen Doxyfile
+
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: $token
+    keep_history: false
+    on:
+      branch: master
+    local_dir: html
+    verbose: true
+
+# coverity_scan:
