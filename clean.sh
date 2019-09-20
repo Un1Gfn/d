@@ -1,5 +1,5 @@
 #!/bin/bash 
 
-find ./ -type f -a \( -name '*.out' -o -name '*.o' -o -name '*.gch' -o -name 'vgcore.?????' \) -exec rm -v {} \;
+rm -rfv html/
 
-rm -rf html/
+find ./ -type f -a \( -name '*.out' -o -name '*.o' -o -name '*.gch' -o -name 'vgcore.?????' \) -exec rm -v {} \;
